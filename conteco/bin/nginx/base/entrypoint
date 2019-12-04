@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+envsubst < /etc/nginx/conf.d/conteco.template > /etc/nginx/conf.d/conteco.conf
+nginx -g "daemon off;"

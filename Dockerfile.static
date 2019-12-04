@@ -1,0 +1,29 @@
+##### BEGIN image/Dockerfile/image-header #####
+FROM vcwebio/conteco.nginx.base:1.17.3 AS base
+##### END image/Dockerfile/image-header #####
+
+##### BEGIN image/Dockerfile/conteco #####
+COPY ./conteco/ /conteco/
+RUN chmod -R +x /conteco/bin && rm -rf /conteco/repo
+COPY ./ /conteco/repo/
+##### END image/Dockerfile/conteco #####
+
+##### BEGIN image/Dockerfile/build-instructions #####
+ENV CONTECO_ENTRYPOINT "/conteco/bin/nginx/base/entrypoint"
+COPY ./conteco/configs/etc/nginx/ /etc/nginx/
+RUN chmod -R 777 /etc/nginx/conf.d
+##### END image/Dockerfile/build-instructions #####
+
+##### BEGIN image/Dockerfile/env-labels-footer #####
+ENV CONTECO_NAME="rewrite" \
+    CONTECO_TAG="v1.0.0" \
+    CONTECO_BASE="nginx.base:1.17.3" \
+    CONTECO_BUILD="image"
+LABEL io.vcweb.name="rewrite" \
+      io.vcweb.tag="v1.0.0" \
+      io.vcweb.base="nginx.base:1.17.3" \
+      io.vcweb.build="image" \
+      io.vcweb.label="Conteco Nginx Rewrite" \
+      io.vcweb.description="The ContEco Nginx image to URL rewrite a single service." \
+      io.vcweb.docker.cmd.help="docker run vcwebio/conteco.nginx.rewrite --help"
+##### END image/Dockerfile/env-labels-footer #####

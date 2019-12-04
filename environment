@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+export CONTECO_LABEL="Conteco Nginx Rewrite"
+export CONTECO_DESCRIPTION="The ContEco Nginx image to URL rewrite a single service."
+
+export CONTECO_TYPE="nginx"
+export CONTECO_NAME="rewrite"
+export CONTECO_TAG="v1.0.0"
+
+export CONTECO_BASE="nginx.base:1.17.3"
+export CONTECO_BUILD="image"

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# the default is to return the message as is
+# each container type instance can implement its own if required
+stream=$1
+INPUT=$2
+
+# check if it is httplogs
+if [[ $INPUT == "{"* ]] ; then
+
+	source=$(echo "$INPUT" | jq -r '. | .source')
+	if [[ $source == "httplogs" ]] ; then
+
+		requestline=$(echo "$INPUT" | jq -r '. | .requestline')
+		request_method=$( echo "$requestline" | cut -d ' ' -f 1)
+		request_url=$( echo "$requestline" | cut -d ' ' -f 2)
+		request_protocol=$( echo "$requestline" | cut -d ' ' -f 3)
+
+		INPUT=$(echo $INPUT | jq --arg method $request_method '. + {method: $method}' | jq --arg url $request_url '. + {url: $url}' | jq --arg protocol $request_protocol '. + {protocol: $protocol}' | jq 'del(.requestline)')
+
+		printf "%s" "$INPUT"
+		exit
+		
+	fi
+
+fi
+
+level=$(echo $INPUT | cut -d '[' -f2 | cut -d ']' -f1)
+if [[ $level == "warn" ]] ; then
+	LEVEL="WARNING"
+	MESSAGE=$(echo $INPUT | cut -d ']' -f2 | jq -aR .)
+elif [[ $level == "error" ]] ; then
+	LEVEL="ERROR"
+	MESSAGE=$(echo $INPUT | cut -d ']' -f2 | jq -aR .)
+else
+	LEVEL="INFO"
+	MESSAGE=$(echo $INPUT | cut -d ']' -f2 | jq -aR .)
+fi
+printf '{ "source": "logger", "level": "%s", "message":%s }' "$LEVEL" "$MESSAGE"
+
+
+ 

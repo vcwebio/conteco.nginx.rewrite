@@ -1,0 +1,14 @@
+
+server {
+
+  listen 80;
+  server_name localhost ~^.*$;
+  client_max_body_size 100m;
+
+
+  location ${CONTECO_NGINX_CONF_LOCATION}/ {
+    proxy_pass http://${CONTECO_NGINX_CONF_PROXY_PASS}/;
+    rewrite ^${CONTECO_NGINX_CONF_LOCATION}/(.*) /$1 break;
+  }
+
+}
