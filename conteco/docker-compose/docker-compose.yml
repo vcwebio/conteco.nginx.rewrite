@@ -8,8 +8,8 @@ services:
     environment: ['CONTECO_NGINX_CONF_LOCATION=${CONTECO_DC_NGINX_REWRITE_ENVIRONMENT_CONF_PATH}', 'CONTECO_NGINX_CONF_PROXY_PASS=${CONTECO_DC_NGINX_REWRITE_ENVIRONMENT_CONF_UPSTREAM}']
     command: []
     volumes: []
-    ports: [${CONTECO_DC_NGINX_REWRITE_PORTS}]
-    networks: [${CONTECO_DC_NGINX_REWRITE_NETWORKS}]
+    ports: []
+    networks: [conteco_overlay, ${CONTECO_TYPE}_overlay]
     deploy:
       mode: replicated
       resources:
@@ -22,5 +22,5 @@ services:
       labels: [${CONTECO_DC_NGINX_REWRITE_DEPLOY_LABELS}]
 # END SERVICE nginx.rewrite
 
-volumes: {${CONTECO_DC_GLOBAL_VOLUMES}}
-networks: {${CONTECO_DC_GLOBAL_NETWORKS}}
+volumes: {}
+networks: {conteco_overlay: { external: true }, ${CONTECO_TYPE}_overlay: { external: true }}
