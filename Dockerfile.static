@@ -16,14 +16,14 @@ RUN chmod -R 777 /etc/nginx/conf.d
 
 ##### BEGIN image/Dockerfile/env-labels-footer #####
 ENV CONTECO_NAME="rewrite" \
-    CONTECO_TAG="v1.0.0" \
+    CONTECO_TAG=":1.17.3" \
     CONTECO_BASE="nginx.base:1.17.3" \
     CONTECO_BUILD="image"
 LABEL io.vcweb.name="rewrite" \
-      io.vcweb.tag="v1.0.0" \
+      io.vcweb.tag=":1.17.3" \
       io.vcweb.base="nginx.base:1.17.3" \
       io.vcweb.build="image" \
-      io.vcweb.label="Conteco Nginx Rewrite" \
-      io.vcweb.description="The ContEco Nginx image to URL rewrite a single service." \
+      io.vcweb.label="nginx.rewrite - ContEco" \
+      io.vcweb.description="Nginx Rewrite implements a generic URL rewrite template using environment variables." \
       io.vcweb.docker.cmd.help="docker run vcwebio/conteco.nginx.rewrite --help"
 ##### END image/Dockerfile/env-labels-footer #####
