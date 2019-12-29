@@ -16,11 +16,11 @@ RUN chmod -R 777 /etc/nginx/conf.d
 
 ##### BEGIN image/Dockerfile/env-labels-footer #####
 ENV CONTECO_NAME="rewrite" \
-    CONTECO_TAG=":1.17.3" \
+    CONTECO_TAG="1.17.3" \
     CONTECO_BASE="nginx.base:1.17.3" \
     CONTECO_BUILD="image"
 LABEL io.vcweb.name="rewrite" \
-      io.vcweb.tag=":1.17.3" \
+      io.vcweb.tag="1.17.3" \
       io.vcweb.base="nginx.base:1.17.3" \
       io.vcweb.build="image" \
       io.vcweb.label="nginx.rewrite - ContEco" \
