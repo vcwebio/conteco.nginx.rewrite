@@ -1,0 +1,26 @@
+---
+version: '3'
+services:
+
+# START SERVICE nginx.rewrite
+  nginx:
+    image: ${CONTECO_REGISTRY}${CONTECO_REALM}/conteco.nginx.rewrite:1.17.3
+    environment: ['CONTECO_NGINX_CONF_LOCATION=${CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_PATH}', 'CONTECO_NGINX_CONF_PROXY_PASS=${CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_UPSTREAM}']
+    command: []
+    volumes: [${CONTECO_DC_URL_REWRITE_VOLUMES}]
+    ports: []
+    networks: [conteco_overlay, ${CONTECO_TYPE}_overlay]
+    deploy:
+      mode: replicated
+      resources:
+        limits:
+          cpus: '${CONTECO_DC_URL_REWRITE_DEPLOY_RESOURCES_LIMITS_CPUS}'
+          memory: '${CONTECO_DC_URL_REWRITE_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+        reservations:
+          cpus: '${CONTECO_DC_URL_REWRITE_DEPLOY_RESOURCES_RESERVATIONS_CPUS}'
+          memory: '${CONTECO_DC_URL_REWRITE_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+      labels: [${CONTECO_DC_URL_REWRITE_DEPLOY_LABELS}]
+# END SERVICE nginx.rewrite
+
+volumes: {${CONTECO_DC_GLOBAL_VOLUMES}}
+networks: {conteco_overlay: { external: true }, ${CONTECO_TYPE}_overlay: { external: true }}
