@@ -4,12 +4,12 @@ services:
 
 # START SERVICE nginx.rewrite
   nginx:
-    image: ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.nginx.rewrite:1.17.3
+    image: ${CONTECO_REGISTRY}${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.nginx.rewrite:1.17.3
     environment: ['CONTECO_NGINX_CONF_LOCATION=${CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_PATH}', 'CONTECO_NGINX_CONF_PROXY_PASS=${CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_UPSTREAM}']
     command: []
     volumes: [${CONTECO_DC_URL_REWRITE_VOLUMES}]
     ports: []
-    networks: [${CONTECO_ECOSYSTEM_RUNTIME}_overlay, ${CONTECO_TYPE}_overlay]
+    networks: [${CONTECO_NETWORKGLOBAL}_overlay, ${CONTECO_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
       resources:
@@ -23,4 +23,4 @@ services:
 # END SERVICE nginx.rewrite
 
 volumes: {${CONTECO_DC_GLOBAL_VOLUMES}}
-networks: {${CONTECO_ECOSYSTEM_RUNTIME}_overlay: { external: true }, ${CONTECO_TYPE}_overlay: { external: true }}
+networks: {${CONTECO_NETWORKGLOBAL}_overlay: { external: true }, ${CONTECO_NETWORKLOCAL}_overlay: { external: true }}

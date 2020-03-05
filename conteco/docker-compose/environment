@@ -18,16 +18,16 @@ export CONTECO_DC_URL_REWRITE_ENVIRONMENT="\
 'CONTECO_NGINX_CONF_PROXY_PASS=${DOLLAR}{CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_UPSTREAM}'"
 export CONTECO_DC_URL_REWRITE_COMMAND=
 export CONTECO_DC_URL_REWRITE_PORTS=
-export CONTECO_DC_URL_REWRITE_NETWORKS="${DOLLAR}{CONTECO_ECOSYSTEM_RUNTIME}_overlay, ${DOLLAR}{CONTECO_TYPE}_overlay"
+export CONTECO_DC_URL_REWRITE_NETWORKS="${DOLLAR}{CONTECO_NETWORKGLOBAL}_overlay, ${DOLLAR}{CONTECO_NETWORKLOCAL}_overlay"
 export CONTECO_DC_URL_REWRITE_DEPLOY_MODE="replicated"
-export CONTECO_DC_GLOBAL_NETWORKS="${DOLLAR}{CONTECO_ECOSYSTEM_RUNTIME}_overlay: { external: true }, ${DOLLAR}{CONTECO_TYPE}_overlay: { external: true }"
+export CONTECO_DC_GLOBAL_NETWORKS="${DOLLAR}{CONTECO_NETWORKGLOBAL}_overlay: { external: true }, ${DOLLAR}{CONTECO_NETWORKLOCAL}_overlay: { external: true }"
 # END GLOBAL SETTINGS
 
 # START SETTINGS nginx.base
 export CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_PATH="/${CONTECO_TYPE}/conteco_dc_streamsets"
 export CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_UPSTREAM="${CONTECO_TYPE}_conteco_dc_streamsets:18630"
 export CONTECO_DC_URL_REWRITE_VOLUMES=
-export CONTECO_DC_URL_REWRITE_DEPLOY_LABELS="traefik.enable=true,traefik.docker.network=${CONTECO_ECOSYSTEM_RUNTIME}_overlay, traefik.http.services.${CONTECO_TYPE}_conteco_dc_streamsets_${CONTECO_TYPE}.loadbalancer.server.port=80, traefik.http.routers.${CONTECO_TYPE}_conteco_dc_streamsets_${CONTECO_TYPE}.entrypoints=conteco, traefik.http.routers.${CONTECO_TYPE}_conteco_dc_streamsets_${CONTECO_TYPE}.rule=PathPrefix(\"/${CONTECO_TYPE}/conteco_dc_streamsets\")"
+export CONTECO_DC_URL_REWRITE_DEPLOY_LABELS="traefik.enable=true,traefik.docker.network=${DOLLAR}{CONTECO_NETWORKGLOBAL}_overlay, traefik.http.services.${DOLLAR}{CONTECO_STACKPREFIX}_nginx.loadbalancer.server.port=80, traefik.http.routers.${DOLLAR}{CONTECO_STACKPREFIX}_nginx.entrypoints=conteco, traefik.http.routers.${DOLLAR}{CONTECO_STACKPREFIX}_nginx.rule=PathPrefix(\"/$(echo "${DOLLAR}{CONTECO_STACKPREFIX}" | tr _ /)/nginx\")"
 export CONTECO_DC_URL_REWRITE_DEPLOY_RESOURCES_LIMITS_CPUS=
 export CONTECO_DC_URL_REWRITE_DEPLOY_RESOURCES_RESERVATIONS_CPUS="0.1"
 export CONTECO_DC_URL_REWRITE_DEPLOY_RESOURCES_LIMITS_MEMORY="64m"
