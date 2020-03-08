@@ -4,7 +4,7 @@ services:
 
 # START SERVICE nginx.rewrite
   nginx:
-    image: ${CONTECO_REGISTRY}${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.nginx.rewrite:1.17.3
+    image: ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.nginx.rewrite:1.17.3
     environment: ['CONTECO_NGINX_CONF_LOCATION=${CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_PATH}', 'CONTECO_NGINX_CONF_PROXY_PASS=${CONTECO_DC_URL_REWRITE_ENVIRONMENT_CONF_UPSTREAM}']
     command: []
     volumes: []
