@@ -5,7 +5,7 @@ export CONTECO_DESCRIPTION="Nginx Rewrite implements a generic URL rewrite templ
 
 export CONTECO_TYPE="nginx"
 export CONTECO_NAME="rewrite"
-export CONTECO_TAG="1.17.3"
+export CONTECO_TAG="1.19.3"
 
-export CONTECO_BASE="nginx.base:1.17.3"
+export CONTECO_BASE="nginx.base:1.19.3"
 export CONTECO_BUILD="image"

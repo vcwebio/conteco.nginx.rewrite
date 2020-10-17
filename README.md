@@ -21,4 +21,4 @@ location ${CONTECO_NGINX_CONF_LOCATION}/ {
 
 ## Tags
 
-* 1.17.3
+* 1.19.3

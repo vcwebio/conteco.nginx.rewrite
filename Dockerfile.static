@@ -1,5 +1,5 @@
 ##### BEGIN image/Dockerfile/image-header #####
-FROM vcwebio/conteco.nginx.base:1.17.3 AS base
+FROM vcwebio/conteco.nginx.base:1.19.3 AS base
 ##### END image/Dockerfile/image-header #####
 
 ##### BEGIN image/Dockerfile/conteco #####
@@ -16,12 +16,12 @@ RUN chmod -R 777 /etc/nginx/conf.d
 
 ##### BEGIN image/Dockerfile/env-labels-footer #####
 ENV CONTECO_NAME="rewrite" \
-    CONTECO_TAG="1.17.3" \
-    CONTECO_BASE="nginx.base:1.17.3" \
+    CONTECO_TAG="1.19.3" \
+    CONTECO_BASE="nginx.base:1.19.3" \
     CONTECO_BUILD="image"
 LABEL io.vcweb.name="rewrite" \
-      io.vcweb.tag="1.17.3" \
-      io.vcweb.base="nginx.base:1.17.3" \
+      io.vcweb.tag="1.19.3" \
+      io.vcweb.base="nginx.base:1.19.3" \
       io.vcweb.build="image" \
       io.vcweb.label="nginx.rewrite - ContEco" \
       io.vcweb.description="Nginx Rewrite implements a generic URL rewrite template using environment variables." \
